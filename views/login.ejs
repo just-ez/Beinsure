@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be_Insure</title>
+    <%- include('./partials/css/style.ejs') %>
+    <%- include('./partials/css/loginstyle.ejs') %>
+</head>
+<body>
+    <%- include('./partials/components/nav.ejs') %>
+    <div class="signup">
+    <form action="" method="post">
+        <p class="form_head">Sing up</p>
+        <p style="margin-right: 40%;">Insurance Makes Your Life Better.</p>
+    
+
+        <input type="email" name="" id="email" placeholder="input email" required>
+
+       
+        <input type="password" name="" id="password" placeholder="Retype password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+         <button>submit</button>
+       <p class="link">Don't have an account? <a href="/api/signup">Signup</a></p>
+       
+    </form>
+ </div>
+</body>
+</html>
+
+ <script>
+   const form = document.querySelector('form')
+   form.addEventListener('submit', async (e)=> {
+
+      e.preventDefault()
+      const email = document.getElementById('email').value
+      const password = document.getElementById('password').value
+      
+      try {
+     const res = await fetch('/api/login', {
+      method: 'POST',
+      body: JSON.stringify({email: email,password: password}),
+      headers: { 'Content-Type': 'application/json'}
+     })
+     const data = await res.json()
+     console.log(data);
+    //  if (data.message) {
+    //   return document.getElementById('error').innerHTML = data.message
+    //  }
+     console.log('e reach here');
+     location.assign('/api/dashboard')
+     
+      }
+      catch (err) {
+    console.log(err);
+      }
+   })
+ </script>
