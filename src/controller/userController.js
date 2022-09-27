@@ -69,8 +69,8 @@ module.exports.login_get = (req,res) => {
   res.render('login')
 }
 module.exports.logout = (req,res) => {
-  res.cookie("Token", '', { httpOnly: true });
-  res.redirect('/api/signup')
+  res.cookie("Token", '', { maxAge: 1 });
+  res.redirect('/api/login')
 }
 module.exports.getDashboard = async (req,res) => {
   const id = req.decoded._id
