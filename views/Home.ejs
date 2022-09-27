@@ -70,7 +70,8 @@
  location.assign(data.data.confirmationUrl)
   })
  const verify = document.getElementById('verify');
- verify.addEventListener('click', async()=> {
+ if (verify) {
+    verify.addEventListener('click', async()=> {
     const email = document.getElementById('email').innerHTML;
      const res = await fetch( '/api/pay/verifyPayment', {
       method: 'POST',
@@ -81,5 +82,6 @@
      console.log(data.data);
      location.reload()
  })
+ }
  
 </script>

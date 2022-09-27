@@ -41,7 +41,6 @@
  <script>
    const form = document.querySelector('form')
    form.addEventListener('submit', async (e)=> {
-
       e.preventDefault()
       const name = document.getElementById('name').value
       const email = document.getElementById('email').value
@@ -59,9 +58,9 @@
      })
      const data = await res.json()
      console.log(data);
-    //  if (data.message) {
-    //   return document.getElementById('error').innerHTML = data.message
-    //  }
+     if (data.message) {
+      return document.getElementById('error').innerHTML = data.message
+     }
      console.log('e reach here');
      location.assign('/api/dashboard')
      
