@@ -35,7 +35,7 @@ exports.initializePayment = async (email) => {
         console.log(response.data)
         return {reference: response.data.data.reference, confirmationUrl: response.data.data.authorization_url };
     } catch (e) {
-        BaseController.error(res,{code: 400},e)
+        console.log(e);
     }
 }
 
