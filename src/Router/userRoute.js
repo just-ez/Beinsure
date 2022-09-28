@@ -9,7 +9,7 @@ router.post("/signup", user.signup);
 
 router.get("/signup", user.signup_get);
 
-router.patch("/user", user.updateUser);
+router.patch("/user/:id", user.updateUser);
 
 router.post("/login", user.login);
 

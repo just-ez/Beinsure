@@ -85,6 +85,17 @@
     background-color: green;
     border-radius: 20px;
  }
+ .select_plan {
+    width: 400px;
+    padding: 6px;
+    margin: 6px;
+    background-color: coral;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.151);
+ }
+ .select_plan select {
+    width: 100%;
+    padding: 5px;
+ }
     main button {
         width: 200px;
         padding: 20px;
@@ -101,15 +112,26 @@
     <%- include('./partials/components/nav.ejs') %>
     <main>
     <div class="greeting">
-         <h2>Welcome  <span id="user_name"><%= user.first_name %></span></h2>
+         <h2>Welcome  <span id="user_name"><%= user.first_name %></span><span id="user_id" style="opacity:0;"><%= user.id %></span></h2>
     </div>
    <div class="dashboard">
+   
    <div class="plan">
     <h2>Insurance Plan</h2>
     <div class="plan_name">
     <img src="/img/<%= user.plan %>.jpg" alt="medal">
     <p><%= user.plan %></p>
 </div>
+ <div class="select_plan">
+    <form  id="change_plan">
+            <select name="plan" id="plan">
+    <option value="platinum">platinum</option>
+    <option value="silver">silver</option>
+    <option value="gold">Gold</option>
+  </select>
+  <button style="width:fit-content; padding: 10px;" >change plan</button>
+    </form>
+    </div>
    </div>
    <div class="activate_plan">
     <% if (user.isPaymentVerified === false) { %>
@@ -155,6 +177,23 @@
      const data = await res.json()
      console.log(data.data);
  location.assign(data.data.confirmationUrl)
+  })
+
+ const change_plan = document.getElementById('change_plan');
+  change_plan.addEventListener('submit', async (e)=> {
+    const plan = document.getElementById('plan').value
+    const id = document.getElementById('user_id').innerHTML
+    console.log(plan);
+ e.preventDefault()
+  const res = await fetch( `/api/user/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({plan: plan}),
+      headers: { 'Content-Type': 'application/json'}
+     })
+     const data = await res.json()
+     console.log(data);
+ location.reload()
+
   })
  const verify = document.getElementById('verify');
  if (verify) {

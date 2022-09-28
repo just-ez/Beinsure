@@ -42,7 +42,7 @@ module.exports.signup_get = (req,res) => {
 
 module.exports.updateUser = async (req, res) => {
   try {
-    const updateUser = await new User(req.body).updateUser();
+    const updateUser = await new User({id: req.params.id, ...req.body}).updateUser();
     if (updateUser) return success(res, updateUser, "user details updated");
     return error(res, 400, "unable to update user");
   } catch (err) {

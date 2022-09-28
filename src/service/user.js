@@ -38,7 +38,7 @@ class User {
 
   async updateUser() {
     const updatedata = this.data;
-    const findUser = await USermodel.findOne({ email: this.data.email });
+    const findUser = await USermodel.findOne({ _id: this.data.id });
     console.log(findUser);
     if (findUser) {
       const updated = await USermodel.updateOne(
